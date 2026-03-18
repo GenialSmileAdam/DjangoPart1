@@ -1,0 +1,176 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+pythonenv.*
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+static_root/
+media_root/
+
+# Virtual Environment
+myenv/
+env/
+venv/
+.env
+.venv
+virtualenv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-workspace
+*.sublime-project
+
+# Project specific
+*.bak
+*.sql
+*.sqlite3
+
+# Django migrations (uncomment if you want to ignore migration files)
+# */migrations/*.py
+# !*/migrations/__init__.py
+
+# Coverage reports
+.coverage
+htmlcov/
+coverage.xml
+*.cover
+
+# Flask stuff (though you're using Django)
+instance/
+.webassets-cache
+
+# Scrapy stuff
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# poetry
+poetry.lock
+
+# pdm
+.pdm.toml
+
+# pyre type checker
+.pyre/
+
+# celery
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# PyCharm
+.idea/
+*.iml
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.log
+
+# Django static files
+static/
+staticfiles/
+
+# Uploaded media files
+media/
+
+# Secret files
+*.key
+*.pem
+*.crt
+secrets.json
+.env.local
+.env.production
+.env.development
+
+# Database backups
+*.backup
+*.dump
+*.sqlite3-backup
+
+# Testing
+*.test.py
+.pytest_cache/
+.tox/
+.coverage
+htmlcov/
