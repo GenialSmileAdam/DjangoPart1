@@ -8,7 +8,6 @@ def calculate():
     return x
 
 def say_hello(request):
-    x= calculate()
     return render(request, 'home.html',
                   {
                       'name':"Jason"

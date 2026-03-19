@@ -14,8 +14,9 @@ class Collection(models.Model):
 class Product(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
+    slug =  models.SlugField()
     # 9999999.99
-    price =  models.DecimalField(decimal_places=2, max_digits=9)
+    unit_price =  models.DecimalField(decimal_places=2, max_digits=9)
     inventory = models.IntegerField()
     last_update = models.DateTimeField(auto_now = True)
     collection = models.ForeignKey(Collection, on_delete=models.PROTECT)
@@ -33,9 +34,10 @@ class Customer(models.Model):
     first_name = models.CharField(max_length=200)
     last_name= models.CharField(max_length=200)
     email = models.EmailField(unique=True)
-    phone = models.IntegerField(max_length=15)
+    phone = models.IntegerField()
     birth_date = models.DateTimeField(default=datetime.date.today, null=True)
     membership =  models.CharField(max_length=255, choices=MEMBERSHIP_CHOICES, default=MEMBERSHIP_BRONZE)
+
 
 
 class Order(models.Model):
@@ -79,5 +81,6 @@ class Address(models.Model):
     street = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    zip_code = models.PositiveBigIntegerField(default=00000)
 
 
