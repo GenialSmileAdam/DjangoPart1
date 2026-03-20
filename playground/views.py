@@ -1,13 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
-# Create your views here.
-def calculate():
-    x = 29
-    y= 17
-    return x
+from store.models import Product
 
 def say_hello(request):
+    query_set = Product.objects.all()
+
+    for product in query_set:
+        print(product.title)
     return render(request, 'home.html',
                   {
                       'name':"Jason"
