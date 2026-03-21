@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Queries</title>
+  </head>
+  <body>
+    <h1>Query response</h1>
+ 
+    <ul>
+      {% for product in result %}
+      <li>{{product.title}} </li>
+      {%endfor%}
+    </ul>
+  </body>
+</html>

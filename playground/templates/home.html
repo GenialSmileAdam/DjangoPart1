@@ -1,15 +1,22 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Django Day 1</title>
-</head>
-<body>
-<h1>Today is going to be a beautiful day</h1>
-{% if name == 'Jason'%}
-<h2>How are you doing today my Friend, It is nice to see you once again</h2>
-{% else%}
-<h2>Who are you Stranger, Tell me whats your name </h2>
-{% endif%}
-</body>
+  </head>
+  <body>
+    <h1>Today is going to be a beautiful day</h1>
+    {% if name == 'Jason'%}
+    <h2>How are you doing today my Friend, It is nice to see you once again</h2>
+    {% else%}
+    <h2>Who are you Stranger, Tell me whats your name</h2>
+
+    <h2>List of products</h2>
+    {% endif%}
+    <ul>
+      {% for product in result %}
+      <li>{{product}} </li>
+      {%endfor%}
+    </ul>
+  </body>
 </html>

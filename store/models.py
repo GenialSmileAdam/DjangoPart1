@@ -62,7 +62,7 @@ class OrderItem(models.Model):
     # Relationships 
     order = models.ForeignKey(Order, on_delete=models.PROTECT)
     product = models.ForeignKey(Product, on_delete=models.PROTECT)
-    cart = models.ForeignKey(Cart, on_delete=models.PROTECT)
+
 
 class CartItem(models.Model):
     quantity = models.PositiveSmallIntegerField()
