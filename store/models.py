@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 import datetime
 # Create your models here.
 
@@ -8,7 +9,7 @@ class Promotion(models.Model):
 
 class Collection(models.Model):
     title= models.CharField(max_length=255)
-    featured_products = models.ForeignKey('Product', on_delete=models.SET_NULL,null=True,related_name='+')
+    featured_product = models.ForeignKey('Product', on_delete=models.SET_NULL,null=True,related_name='+')
 
 
 class Product(models.Model):
@@ -27,17 +28,33 @@ class Customer(models.Model):
     MEMBERSHIP_SILVER = "S" 
     MEMBERSHIP_GOLD = "G"
     MEMBERSHIP_CHOICES = {
-        MEMBERSHIP_GOLD:'Gold',
-        MEMBERSHIP_BRONZE:'Bronze',
-        MEMBERSHIP_SILVER:'Silver',
+        MEMBERSHIP_GOLD: 'Gold',
+        MEMBERSHIP_BRONZE: 'Bronze',
+        MEMBERSHIP_SILVER: 'Silver',
     }
-    first_name = models.CharField(max_length=200)
-    last_name= models.CharField(max_length=200)
-    email = models.EmailField(unique=True)
+    
+    # Link to Django's User model (or custom User if you have one)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    
+    # Customer-specific fields only
     phone = models.CharField(max_length=255)
-    birth_date = models.DateTimeField(default=datetime.date.today, null=True)
-    membership =  models.CharField(max_length=255, choices=MEMBERSHIP_CHOICES, default=MEMBERSHIP_BRONZE)
-
+    birth_date = models.DateField(default=datetime.date.today, null=True, blank=True)
+    membership = models.CharField(max_length=1, choices=MEMBERSHIP_CHOICES, default=MEMBERSHIP_BRONZE)
+    
+    def __str__(self):
+        return f'{self.user.first_name} {self.user.last_name}'
+    
+    @property
+    def first_name(self):
+        return self.user.first_name
+    
+    @property
+    def last_name(self):
+        return self.user.last_name
+    
+    @property
+    def email(self):
+        return self.user.email
 
 
 class Order(models.Model):
@@ -52,6 +69,7 @@ class Order(models.Model):
     placed_at =models.DateTimeField(auto_now_add=True)
     payment_status = models.CharField(max_length=2, choices = PAYMENT_STATUS_CHOICES, default= PAYMENT_STATUS_PENDING)
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT)
+    
 class Cart(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 

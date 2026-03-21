@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q, F
-from store.models import Product, OrderItem
+from store.models import Product, OrderItem, Order
 
 # def say_hello(request):
     # query set is lazy , it is evaluated at a later time 
@@ -72,7 +72,14 @@ from store.models import Product, OrderItem
     # return render(request, 'home.html',
     #               {'result':product.title,
     #                'name':'Jason'})
+def play(request):
+    # query_set = Product.objects.select_related('collection').prefetch_related('promotions').all()
+    query_set = Order.objects.select_related('customer').order_by('-placed_at').prefetch_related('orderitem_set').all()
 
+
+    return render(request, 'home.html',
+                {'result':list(query_set),
+                'name':'Jason'})
 
 
 
@@ -119,5 +126,19 @@ def ordered_items(request):
     
     
     return render(request, 'query.html',
-                  {'result':list(query_set),
-                   'name':'Jason'})
+                  {'result':list(query_set)})
+
+def get_only_objects(request):
+    query_set = Product.objects.only('id','title')
+
+
+    return render(request, 'query.html',
+                  {'result':list(query_set)})
+
+
+def get_deferred_objects(request):
+    query_set = Product.objects.defer('description')
+
+
+    return render(request, 'query.html',
+                  {'result':list(query_set)})

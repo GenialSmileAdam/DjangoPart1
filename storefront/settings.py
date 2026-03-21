@@ -40,7 +40,10 @@ INSTALLED_APPS = [
     "debug_toolbar",
     'store',
     'tags',
+    'core',
 ]
+
+AUTH_USER_MODEL = 'core.User'
 
 MIDDLEWARE = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
