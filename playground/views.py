@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
-from django.db.models import Q, F
+from django.db.models import Q, F,Value
+from django.db.models.aggregates import Count, Avg, Max, Min, Sum
 from store.models import Product, OrderItem, Order
 
 # def say_hello(request):
@@ -74,11 +75,17 @@ from store.models import Product, OrderItem, Order
     #                'name':'Jason'})
 def play(request):
     # query_set = Product.objects.select_related('collection').prefetch_related('promotions').all()
-    query_set = Order.objects.select_related('customer').order_by('-placed_at').prefetch_related('orderitem_set').all()
+    # query_set = Order.objects.select_related(
+    #     'customer').prefetch_related('orderitem_set__product').order_by('-placed_at')[:5]
+    
+    # Aggregate data
+    # result = Product.objects.filter(collection__id=6).aggregate(count= Count('pk'), max_price = Max('unit_price'))
 
+    # Annotating objects
+    query_set = Product.objects.annotate(is_rich = Value(True), new_id = F('unit_price' ) /2)
 
     return render(request, 'home.html',
-                {'result':list(query_set),
+                {'result':query_set ,
                 'name':'Jason'})
 
 
